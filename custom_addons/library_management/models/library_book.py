@@ -15,4 +15,4 @@ class LibraryBook(models.Model):
     @api.depends('borrowing_ids.is_returned')
     def _compute_is_available(self):
         for book in self:
-            book.is_available = not any(borrowing.is_returned == False for borrowing in book.borrowing_ids)
+            book.is_available = not any(not borrowing.is_returned for borrowing in book.borrowing_ids)
