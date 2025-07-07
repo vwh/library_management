@@ -1,0 +1,24 @@
+<!-- library_menus.xml -->
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="library_menu_root" name="Library" sequence="10"/>
+
+    <!-- Sub Menus -->
+    <menuitem id="library_book_menu" 
+              name="Books" 
+              parent="library_menu_root" 
+              action="library_book_action" 
+              sequence="10"/>
+              
+    <menuitem id="library_author_menu" 
+              name="Authors" 
+              parent="library_menu_root" 
+              action="library_author_action" 
+              sequence="20"/>
+              
+    <menuitem id="library_borrowing_menu" 
+              name="Borrowing Records" 
+              parent="library_menu_root" 
+              action="library_borrowing_action" 
+              sequence="30"/>
+</odoo>

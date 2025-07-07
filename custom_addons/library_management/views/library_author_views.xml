@@ -1,0 +1,35 @@
+<odoo>
+    <!-- Author List View -->
+    <record id="library_author_view_list" model="ir.ui.view">
+        <field name="name">library.author.list</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <list string="Authors">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Author Form View -->
+    <record id="library_author_view_form" model="ir.ui.view">
+        <field name="name">library.author.form</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <form string="Author">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Author Action -->
+    <record id="library_author_action" model="ir.actions.act_window">
+        <field name="name">Authors</field>
+        <field name="res_model">library.author</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                                      (0, 0, {'view_mode': 'list', 'view_id': ref('library_author_view_list')}),
+                                      (0, 0, {'view_mode': 'form', 'view_id': ref('library_author_view_form')})]"/>
+    </record>
+</odoo>

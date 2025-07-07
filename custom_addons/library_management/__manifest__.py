@@ -1,0 +1,20 @@
+{
+    'name': 'Library Management',
+    'version': '18.0.1.0.0',
+    'category': 'Tools',
+    'summary': 'Library Management System',
+    'description': 'A simple library management system for managing books, authors, and borrowings',
+    'author': 'Yazan Alqasem',
+    'depends': ['base'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/library_book_views.xml',
+        'views/library_author_views.xml',
+        'views/library_borrowing_views.xml',
+        'views/library_menus.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./odoo",
+        "./custom_addons"
+    ]
+}
