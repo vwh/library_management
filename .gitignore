@@ -55,6 +55,7 @@ htmlcov/
 *.po
 sessions/
 filestore/
+​/odoo/
 
 # Environment
 .env
