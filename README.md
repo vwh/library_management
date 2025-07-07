@@ -2,6 +2,15 @@
 
 This project is a custom Odoo module for managing a library, including books, authors, and a borrowing system. It is built for Odoo 18 and demonstrates best practices for custom addon development.
 
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Development Setup](#development-setup)
+- [Screenshots](#screenshots)
+
 ## Features
 
 - **Book Management**: Create and manage a catalog of books with titles, authors, descriptions, and publish dates.
@@ -13,26 +22,25 @@ This project is a custom Odoo module for managing a library, including books, au
     - A filter to quickly see which books are currently borrowed.
 - **Clear Navigation**: All features are accessible under a top-level "Library" menu in the Odoo UI.
 
-## Project Structure
 
-This project follows the standard Odoo development structure, separating custom addons from the core Odoo source code.
+## Project Structure
 
 ```
 project/
-├── custom_addons/            # All custom modules reside here
-│   └── library_management/
-├── odoo/                     # Core Odoo 18 source code
-└── venv/                     # Python virtual environment
+├── custom_addons/            # Custom modules directory
+│   └── library_management/   # Main library module
+├── odoo/                     # Core Odoo 18 source
+├── venv/                     # Python virtual environment
 ```
 
-## Setup and Installation
+## Prerequisites
 
-### Prerequisites
+- **OS**: Ubuntu 20.04+ (or compatible Linux distribution)
+- **Python**: 3.10 or higher
+- **Database**: PostgreSQL 12+
+- **Version Control**: Git
 
-- Ubuntu (or a compatible Linux distribution)
-- Python 3.10+
-- PostgreSQL 12+
-- Git
+## Installation
 
 ### 1. Clone the Odoo Source
 
@@ -78,7 +86,7 @@ git clone https://github.com/vwh/library_management
 mv library_management/* .
 ```
 
-## How to Run
+## Running the Application
 
 After the initial installation, you can start the server for daily development using this command:
 
@@ -86,9 +94,18 @@ After the initial installation, you can start the server for daily development u
 ./odoo/odoo-bin -d odoo-dev --addons-path=odoo/addons,custom_addons --dev=all
 ```
 
-## VS Code Configuration
+### Access the Application
 
-To enable code completion and hints in Visual Studio Code, a `.vscode/settings.json` file has been included with the following configuration, which tells the Python extension where to find the source modules:
+Once started, access your Odoo instance at:
+- **URL**: `http://localhost:8069`
+- **Database**: `odoo-dev`
+- **Default Admin**: `admin` / `admin`
+
+## Development Setup
+
+### VS Code Configuration
+
+The project includes VS Code settings for optimal development experience:
 
 ```json
 {
@@ -98,3 +115,26 @@ To enable code completion and hints in Visual Studio Code, a `.vscode/settings.j
     ]
 }
 ```
+
+## Screenshots
+
+### Book Management
+
+**Book List View**
+![Book List View](https://github.com/user-attachments/assets/bc8f92e4-2fbc-4c03-8623-17d1f4587426)
+
+**Book Form View**
+![Book Form View](https://github.com/user-attachments/assets/7c6d5734-9aa2-4c7c-b4d0-47350c7db8ad)
+
+### Author Management
+
+**Author List View**
+![Author Management](https://github.com/user-attachments/assets/09d9dd00-981e-40e1-a6dd-3bb9132170c5)
+
+### Borrowing System
+
+**Borrowing Records List**
+![Borrowing Records](https://github.com/user-attachments/assets/3ea09961-276d-4708-a20e-e470092b1941)
+
+**Borrowing Form View**
+![Borrowing Form](https://github.com/user-attachments/assets/59e39b5a-8369-4863-9588-e905cfdcbd4a)
