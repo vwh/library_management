@@ -131,6 +131,12 @@ The project includes VS Code settings for optimal development experience:
 **Author List View**
 ![Author Management](https://github.com/user-attachments/assets/09d9dd00-981e-40e1-a6dd-3bb9132170c5)
 
+**Author View**
+![Author View](https://github.com/user-attachments/assets/42a94415-b101-497d-9e73-74e94f886d87)
+
+**Author Form View**
+![Author Form](https://github.com/user-attachments/assets/ddda55bf-cde3-4127-92bc-3ea3a72a99df)
+
 ### Borrowing System
 
 **Borrowing Records List**

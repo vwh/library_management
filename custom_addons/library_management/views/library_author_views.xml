@@ -19,6 +19,11 @@
                 <group>
                     <field name="name"/>
                 </group>
+                <notebook>
+                    <page string="Books">
+                        <field name="book_ids"/>
+                    </page>
+                </notebook>
             </form>
         </field>
     </record>
