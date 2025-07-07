@@ -121,7 +121,7 @@ The project includes VS Code settings for optimal development experience:
 ### Book Management
 
 **Book List View**
-![Book List View](https://github.com/user-attachments/assets/bc8f92e4-2fbc-4c03-8623-17d1f4587426)
+![Book List View](https://github.com/user-attachments/assets/e5e5056a-ddf6-4bc2-b883-f4b72c9bc133)
 
 **Book Form View**
 ![Book Form View](https://github.com/user-attachments/assets/7c6d5734-9aa2-4c7c-b4d0-47350c7db8ad)
@@ -140,7 +140,7 @@ The project includes VS Code settings for optimal development experience:
 ### Borrowing System
 
 **Borrowing Records List**
-![Borrowing Records](https://github.com/user-attachments/assets/3ea09961-276d-4708-a20e-e470092b1941)
+![Borrowing Records](https://github.com/user-attachments/assets/6cde2ba4-775d-49ad-b726-b9a4c2baf942)
 
 **Borrowing Form View**
 ![Borrowing Form](https://github.com/user-attachments/assets/59e39b5a-8369-4863-9588-e905cfdcbd4a)
