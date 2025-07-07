@@ -71,11 +71,11 @@ createdb odoo-dev
 
 ### 5. Clone the Custom Addon
 
-This project's custom module is available in a separate repository. Clone it and move the module into the `custom_addons` directory so Odoo can find it.
+This project's custom module is available in a separate repository. Clone it and move it contents to root directory so Odoo can find it.
 
 ```bash
 git clone https://github.com/vwh/library_management
-mv library_management/ custom_addons/
+mv library_management/* .
 ```
 
 ## How to Run
