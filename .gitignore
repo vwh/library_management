@@ -63,10 +63,17 @@ filestore/
 venv/
 env/
 
-# VS Code
+# Editor directories and files
 .vscode/*
-!.vscode/settings.json
-!.vscode/launch.json
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.db
 
 # PyCharm
 .idea/
