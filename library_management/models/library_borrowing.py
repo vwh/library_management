@@ -18,6 +18,14 @@ class LibraryBorrowing(models.Model):
         if self.borrow_date:
             self.return_date = self.borrow_date + timedelta(days=7)
 
+    @api.constrains('borrower_id')
+    def _check_member_is_active(self):
+        for borrowing in self:
+            if not borrowing.borrower_id.is_member:
+                raise ValidationError(
+                    f"The borrower {borrowing.borrower_id.name} is not an active member."
+                )
+
     # Constraint to check book availability before allowing a new borrowing
     @api.constrains('book_id', 'is_returned')
     def _check_book_availability(self):
@@ -38,16 +46,21 @@ class LibraryBorrowing(models.Model):
                     )
 
     # Override the create method to add a check for book availability
-    @api.model
-    def create(self, vals):
-        if vals.get('book_id'):
-            book = self.env['library.book'].browse(vals['book_id'])
-            # If the book is not available, prevent borrowing
-            if not book.is_available:
-                raise ValidationError(
-                    f"The book '{book.name}' is not available for borrowing."
-                )
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Ensure vals_list is always a list, even if a single dict is passed
+        if not isinstance(vals_list, list):
+            vals_list = [vals_list]
+
+        for vals in vals_list:
+            if vals.get('book_id'):
+                book = self.env['library.book'].browse(vals['book_id'])
+                # If the book is not available, prevent borrowing
+                if not book.is_available:
+                    raise ValidationError(
+                        f"The book '{book.name}' is not available for borrowing."
+                    )
+        return super().create(vals_list)
 
     # Action method to mark a book as returned
     def action_return_book(self):

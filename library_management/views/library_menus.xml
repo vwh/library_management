@@ -22,4 +22,11 @@
               parent="library_menu_root" 
               action="library_borrowing_action" 
               sequence="30"/>
+
+    <!-- Library Membership Menu -->
+    <menuitem id="library_membership_menu"
+              name="Memberships"
+              parent="library_menu_root"
+              action="library_membership_action"
+              sequence="40"/>
 </odoo>

@@ -1,0 +1,17 @@
+
+<odoo>
+    <data>
+        <record id="product_template_form_view_inherit_library" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.library</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <page name="general_information" position="inside">
+                    <group>
+                        <field name="is_membership_product"/>
+                    </group>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>
