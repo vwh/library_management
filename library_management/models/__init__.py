@@ -13,5 +13,5 @@ __all__ = [
     "library_membership",
     "res_partner",
     "sale_order",
-    "account_move"
+    "account_move",
 ]

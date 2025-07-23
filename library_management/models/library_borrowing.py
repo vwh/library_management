@@ -2,23 +2,24 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 
-class LibraryBorrowing(models.Model):
-    _name = 'library.borrowing'
-    _description = 'Library Borrowing'
 
-    book_id = fields.Many2one('library.book', string='Book', required=True)
-    borrower_id = fields.Many2one('res.partner', string='Borrower', required=True)
-    borrow_date = fields.Date(string='Borrow Date', default=fields.Date.context_today)
-    return_date = fields.Date(string='Return Date')
-    is_returned = fields.Boolean(string='Returned', default=False)
+class LibraryBorrowing(models.Model):
+    _name = "library.borrowing"
+    _description = "Library Borrowing"
+
+    book_id = fields.Many2one("library.book", string="Book", required=True)
+    borrower_id = fields.Many2one("res.partner", string="Borrower", required=True)
+    borrow_date = fields.Date(string="Borrow Date", default=fields.Date.context_today)
+    return_date = fields.Date(string="Return Date")
+    is_returned = fields.Boolean(string="Returned", default=False)
 
     # Onchange method to auto-fill return date 7 days after borrow date
-    @api.onchange('borrow_date')
+    @api.onchange("borrow_date")
     def _onchange_borrow_date(self):
         if self.borrow_date:
             self.return_date = self.borrow_date + timedelta(days=7)
 
-    @api.constrains('borrower_id')
+    @api.constrains("borrower_id")
     def _check_member_is_active(self):
         for borrowing in self:
             if not borrowing.borrower_id.is_member:
@@ -27,17 +28,23 @@ class LibraryBorrowing(models.Model):
                 )
 
     # Constraint to check book availability before allowing a new borrowing
-    @api.constrains('book_id', 'is_returned')
+    @api.constrains("book_id", "is_returned")
     def _check_book_availability(self):
         for borrowing in self:
             # If the current borrowing is not yet returned
             if not borrowing.is_returned:
                 # Search for other unreturned borrowings of the same book
-                other_borrowings = self.search([
-                    ('book_id', '=', borrowing.book_id.id),
-                    ('is_returned', '=', False),
-                    ('id', '!=', borrowing.id) # Exclude the current borrowing record
-                ])
+                other_borrowings = self.search(
+                    [
+                        ("book_id", "=", borrowing.book_id.id),
+                        ("is_returned", "=", False),
+                        (
+                            "id",
+                            "!=",
+                            borrowing.id,
+                        ),  # Exclude the current borrowing record
+                    ]
+                )
                 # If other unreturned borrowings exist, raise a validation error
                 if other_borrowings:
                     raise ValidationError(
@@ -53,8 +60,8 @@ class LibraryBorrowing(models.Model):
             vals_list = [vals_list]
 
         for vals in vals_list:
-            if vals.get('book_id'):
-                book = self.env['library.book'].browse(vals['book_id'])
+            if vals.get("book_id"):
+                book = self.env["library.book"].browse(vals["book_id"])
                 # If the book is not available, prevent borrowing
                 if not book.is_available:
                     raise ValidationError(
@@ -68,5 +75,5 @@ class LibraryBorrowing(models.Model):
             if not borrowing.is_returned:
                 borrowing.is_returned = True
             else:
-                raise ValidationError('This book has already been returned.')
+                raise ValidationError("This book has already been returned.")
         return True
