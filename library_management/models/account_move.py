@@ -1,67 +1,61 @@
+from odoo import models, fields
 import logging
-from odoo import fields, models, tools
 
 _logger = logging.getLogger(__name__)
 
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+    
+    def reconcile(self):
+        # Store moves that might become paid after reconciliation
+        moves_to_check = self.mapped('move_id').filtered(
+            lambda m: m.move_type == 'out_invoice' and m.payment_state != 'paid'
+        )
+        
+        _logger.info(f"=== Before reconciliation: Found {len(moves_to_check)} invoices to check ===")
+        
+        # Perform the reconciliation
+        res = super(AccountMoveLine, self).reconcile()
+        
+        # Check which moves became paid after reconciliation
+        for move in moves_to_check:
+            if move.payment_state == 'paid':
+                _logger.info(f"Invoice {move.name} became paid after reconciliation")
+                move._activate_related_memberships()
+        
+        return res
+
 class AccountMove(models.Model):
     _inherit = 'account.move'
-
-    def action_invoice_in_payment(self):
-        """Called when invoice enters 'in payment' state"""
-        res = super().action_invoice_in_payment()
-        
-        # Activate memberships early if configured
-        if tools.config.get('library_membership.activate_on_in_payment'):
-            self._activate_related_memberships()
-        
-        return res
-
-    def action_invoice_paid(self):
-        """Called when invoice is fully paid and reconciled"""
-        res = super().action_invoice_paid()
-        
-        # Always activate memberships when fully paid
-        self._activate_related_memberships()
-        
-        return res
-
+    
     def _activate_related_memberships(self):
-        """
-        Find and activate draft memberships for paid membership products
-        """
-        membership_model = self.env['library.membership']
-        
-        # Process only customer invoices
-        for move in self.filtered(lambda m: m.move_type == 'out_invoice'):
-            # Check each invoice line
-            for line in move.invoice_line_ids:
-                # Skip non-membership products
-                if not getattr(line.product_id, 'is_membership_product', False):
-                    continue
+        for move in self:
+            if move.move_type == 'out_invoice' and move.payment_state == 'paid':
+                _logger.info(f"Invoice {move.name} is paid, looking for memberships...")
+                
+                # Get the sale order from the invoice
+                sale_orders = move.invoice_line_ids.sale_line_ids.order_id
+                _logger.info(f"Related sale orders: {sale_orders.ids}")
+                
+                # Find memberships created from these sale orders
+                memberships = self.env['library.membership'].search([
+                    ('state', '=', 'draft')
+                ])
+                
+                # Filter memberships that belong to the same partner as this invoice
+                # FIX: Use partner_id instead of member_id
+                related_memberships = memberships.filtered(
+                    lambda m: m.partner_id == move.partner_id
+                )
+                
+                _logger.info(f"Found {len(related_memberships)} memberships to activate for partner {move.partner_id.name}")
+                
+                for membership in related_memberships:
+                    _logger.info(f"Activating membership {membership.id} for member {membership.partner_id.name}")
+                    membership.write({
+                        'state': 'active',
+                        'activation_date': fields.Date.context_today(self),
+                    })
+                    membership._compute_end_date()
+                    _logger.info(f"Membership {membership.id} activated successfully")
 
-                # Search for draft membership to activate
-                domain = [
-                    ('partner_id', '=', move.partner_id.id),
-                    ('product_id', '=', line.product_id.id),
-                    ('state', '=', 'draft'),
-                ]
-                
-                membership = membership_model.search(domain, order='create_date desc', limit=1)
-                
-                if membership:
-                    # Activate the membership
-                    membership.state = 'active'
-                    membership.activation_date = fields.Date.context_today(self)
-                    
-                    _logger.info(
-                        "Activated membership %s for partner %s",
-                        membership.display_name,
-                        move.partner_id.display_name,
-                    )
-                else:
-                    # Log warning if no draft membership found
-                    _logger.warning(
-                        "Unable to locate draft membership for partner %s and product %s",
-                        move.partner_id.display_name,
-                        line.product_id.display_name,
-                    )

@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 from dateutil.relativedelta import relativedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class LibraryMembership(models.Model):
     _name = 'library.membership'
@@ -18,6 +21,8 @@ class LibraryMembership(models.Model):
         ('cancelled', 'Cancelled'), # Manually cancelled
     ], string='State', default='draft')
     
+    activation_date = fields.Date(string='Activation Date')
+
     # Auto-computed end date based on start date + 1 year
     end_date = fields.Date(string='End Date', compute='_compute_end_date', store=True)
 
@@ -45,11 +50,8 @@ class LibraryMembership(models.Model):
         return membership
 
     def write(self, vals):
-        """Override write to handle state changes"""
         res = super(LibraryMembership, self).write(vals)
-        
-        # Recompute end_date when membership becomes active
         if 'state' in vals and vals['state'] == 'active':
+            self.activation_date = fields.Date.context_today(self)
             self._compute_end_date()
-            
         return res
