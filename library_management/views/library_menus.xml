@@ -1,22 +1,22 @@
 <odoo>
-    <!-- Root Menu: Defines the top-level 'Library' menu in Odoo. -->
+    <!-- Root Menu -->
     <menuitem id="library_menu_root" name="Library" sequence="10"/>
 
-    <!-- Books Menu: Links to the action for managing books. -->
+    <!-- Books Menu -->
     <menuitem id="library_book_menu" 
               name="Books" 
               parent="library_menu_root" 
               action="library_book_action" 
               sequence="10"/>
               
-    <!-- Authors Menu: Links to the action for managing authors. -->
+    <!-- Authors Menu -->
     <menuitem id="library_author_menu" 
               name="Authors" 
               parent="library_menu_root" 
               action="library_author_action" 
               sequence="20"/>
               
-    <!-- Borrowing Records Menu: Links to the action for managing borrowing records. -->
+    <!-- Borrowing Records Menu -->
     <menuitem id="library_borrowing_menu" 
               name="Borrowing Records" 
               parent="library_menu_root" 

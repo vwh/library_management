@@ -1,4 +1,5 @@
 
+<!-- Res Partner Form View -->
 <odoo>
     <data>
         <record id="res_partner_view_form_inherit_library" model="ir.ui.view">

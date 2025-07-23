@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Book List View: Displays a list of books with their title, author, publish date, and availability. -->
+    <!-- Book List View -->
     <record id="library_book_view_list" model="ir.ui.view">
         <field name="name">library.book.list</field>
         <field name="model">library.book</field>
@@ -13,7 +13,7 @@
         </field>
     </record>
 
-    <!-- Book Form View: Allows creating and editing book records. -->
+    <!-- Book Form View -->
     <record id="library_book_view_form" model="ir.ui.view">
         <field name="name">library.book.form</field>
         <field name="model">library.book</field>
@@ -30,8 +30,7 @@
         </field>
     </record>
 
-    <!-- Book Action: Defines the window action for the Book model. -->
-    <!-- showing both list and form views. -->
+    <!-- Book Action -->
     <record id="library_book_action" model="ir.actions.act_window">
         <field name="name">Books</field>
         <field name="res_model">library.book</field>

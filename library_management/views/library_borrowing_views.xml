@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Borrowing Search View: Defines search filters and grouping options for borrowing records. -->
+    <!-- Borrowing Search View -->
     <record id="library_borrowing_view_search" model="ir.ui.view">
         <field name="name">library.borrowing.search</field>
         <field name="model">library.borrowing</field>
@@ -25,8 +25,7 @@
         </field>
     </record>
 
-    <!-- Borrowing List View: Displays borrowing records in a list format. -->
-    <!-- Decorations are used to visually distinguish returned vs. active borrowings. -->
+    <!-- Borrowing List View -->
     <record id="library_borrowing_view_list" model="ir.ui.view">
         <field name="name">library.borrowing.list</field>
         <field name="model">library.borrowing</field>
@@ -41,14 +40,14 @@
         </field>
     </record>
 
-    <!-- Borrowing Form View: Allows creating and editing borrowing records. -->
+    <!-- Borrowing Form View -->
     <record id="library_borrowing_view_form" model="ir.ui.view">
         <field name="name">library.borrowing.form</field>
         <field name="model">library.borrowing</field>
         <field name="arch" type="xml">
             <form string="Borrowing Record">
                 <header>
-                    <!-- Button to mark a book as returned. It's hidden if the book is already returned. -->
+                    <!-- Button to mark a book as returned. It's hidden if the book is already returned -->
                     <button name="action_return_book" 
                             type="object" 
                             string="Return Book" 
@@ -66,8 +65,7 @@
         </field>
     </record>
 
-    <!-- Borrowing Action: Defines the window action for the Borrowing model. -->
-    <!-- showing both list and form views. -->
+    <!-- Borrowing Action -->
     <record id="library_borrowing_action" model="ir.actions.act_window">
         <field name="name">Borrowing Records</field>
         <field name="res_model">library.borrowing</field>

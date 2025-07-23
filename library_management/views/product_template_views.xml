@@ -1,4 +1,5 @@
 
+<!-- Product Template Form View -->
 <odoo>
     <data>
         <record id="product_template_form_view_inherit_library" model="ir.ui.view">

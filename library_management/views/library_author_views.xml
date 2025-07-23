@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Author List View: Displays a list of authors with their names. -->
+    <!-- Author List View -->
     <record id="library_author_view_list" model="ir.ui.view">
         <field name="name">library.author.list</field>
         <field name="model">library.author</field>
@@ -10,7 +10,7 @@
         </field>
     </record>
 
-    <!-- Author Form View: Allows creating and editing author records. -->
+    <!-- Author Form View -->
     <record id="library_author_view_form" model="ir.ui.view">
         <field name="name">library.author.form</field>
         <field name="model">library.author</field>
@@ -29,7 +29,7 @@
         </field>
     </record>
 
-    <!-- Author Action: Defines the window action for the Author model. -->
+    <!-- Author Action -->
     <record id="library_author_action" model="ir.actions.act_window">
         <field name="name">Authors</field>
         <field name="res_model">library.author</field>
