@@ -144,3 +144,16 @@ The project includes VS Code settings for optimal development experience:
 
 **Borrowing Form View**
 ![Borrowing Form](https://github.com/user-attachments/assets/59e39b5a-8369-4863-9588-e905cfdcbd4a)
+
+**Product**
+<img width="1072" height="712" alt="image" src="https://github.com/user-attachments/assets/8aa878d0-38c7-4730-bc89-2d7d9ad81309" />
+
+**Sales order**
+<img width="1635" height="651" alt="image" src="https://github.com/user-attachments/assets/5a1686bd-81f8-4fbb-83ae-a5f1a1e8a086" />
+
+**Invoice**
+<img width="1623" height="721" alt="image" src="https://github.com/user-attachments/assets/87759cc2-ab9a-4e3f-8220-ffd0ccecf977" />
+
+**Library Memberships View**
+<img width="1130" height="217" alt="image" src="https://github.com/user-attachments/assets/0ea8ee0c-d4d0-44ea-9d83-7c62d364dcbe" />
+
